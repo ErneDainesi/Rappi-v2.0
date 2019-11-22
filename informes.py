@@ -38,7 +38,7 @@ def mostrar_listado(diccionario):
 		print('{} - {} - ${}'.format(puesto, cliente[0], cliente[1]))
 
 def crear_archivo_rappitenderos(rappitenderos):
-	archivo = open("rappitenderos.csv", 'w')
+	archivo = open("recorridos_rappitenderos.csv", 'w')
 	for rappitendero in rappitenderos:
 		archivo.write("{},{}\n".format(rappitendero, round(rappitenderos[rappitendero]["Distancia recorrida"])))
 	mensaje_info("Se ha creado un archivo de formato .csv")
