@@ -2,7 +2,8 @@
 import random
 import math
 from haversine import haversine
-from imprimir_menus import limpiar_pantalla, ingresar_entero, mensaje_solicitud, mensaje_error, mensaje_info, ingresar_entre_rangos
+from imprimir_menus import limpiar_pantalla, ingresar_entero, ingresar_entre_rangos
+from imprimir_mensaje import mensaje_info, mensaje_error, mensaje_solicitud
 
 def pedido_manual(clientes, restaurantes, rappitenderos):
 	print('\n**** INICIO DE SESION ****\n')
