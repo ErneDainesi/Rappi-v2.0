@@ -1,6 +1,6 @@
 import pickle
 
-def crear_archivos():
+def crear_archivos_binarios():
     info_clientes()
     info_rappitenderos()
     info_restaurantes()
@@ -18,7 +18,7 @@ def info_restaurantes():
 				[('Ribs con BBQ', 650.00), ('Ojo de bife', 700.00), ('Pepsi', 200.00)]]
 	total_de_ventas = (12500.30, 9537.62, 10530.27, 8763.50, 13621.69)
 	datos_restaurantes = [nombre, direccion, telefono, posicion, radio_de_entrega, platos, total_de_ventas]
-	generar_archivo_binario(datos_restaurantes, "restaurantes.bin")
+	generar_archivo_binario(datos_restaurantes, "restaurantes_predefinido.bin")
 
 def info_clientes():
 	nombre = ['Erne Dainesi', 'Lucas Bilo', 'Naza DS', 'Gallardo', 'Ricky Fort']
@@ -28,7 +28,7 @@ def info_clientes():
 	posicion = [(-34.5489, -58.4595), (-34.6082, -58.3709), (-34.5916, -58.3743), (-34.6037, -58.3814), (-34.6156, -58.4351)]
 	rappicreditos = [30.25, 100.50, 150.45, 200.10, 500.05]
 	datos_clientes = [nombre, contrasenia, telefono, direccion, posicion, rappicreditos]
-	generar_archivo_binario(datos_clientes, "clientes.bin")
+	generar_archivo_binario(datos_clientes, "clientes_predefinido.bin")
 
 def info_rappitenderos():
 	nombre = ['Roberto', 'Juan', 'Carlos', 'Alberto', 'Javier']
@@ -37,7 +37,7 @@ def info_rappitenderos():
 	pedido_actual = [{'Pedido' : [], 'Destino' : ''}, {'Pedido' : [], 'Destino' : ''}, {'Pedido' : [], 'Destino' : ''}, {'Pedido' : [], 'Destino' : ''}, {'Pedido' : [], 'Destino' : ''}]
 	distancia_recorrida = [0.0, 0.0, 0.0, 0.0, 0.0]
 	datos_rappitenderos = [nombre, propina_acumulada, posicion_actual, pedido_actual, distancia_recorrida]
-	generar_archivo_binario(datos_rappitenderos, "rappitenderos.bin")
+	generar_archivo_binario(datos_rappitenderos, "rappitenderos_predefinido.bin")
 
 def generar_archivo_binario(diccionario, nombre_del_archivo):
 	with open(nombre_del_archivo, "wb") as arch:
