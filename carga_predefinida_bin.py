@@ -1,5 +1,4 @@
 #MODULO CARGA PREDEFINIDA
-#Sobreescribe los archivos ya existentes, si el usuario lo desea.
 
 from imprimir_menus import limpiar_pantalla, mensaje_info, mensaje_solicitud
 from info_predefinida import crear_archivos_binarios
@@ -11,20 +10,29 @@ def carga_predefinida(restaurantes, clientes, rappitenderos):
 	mensaje_info("Si realiza una carga predefinida los datos anteriores se perderan.")
 	realizar_carga = mensaje_solicitud("Desea continuar? (s/n): ")
 	if realizar_carga == "s":
-		vaciar_archivo("restaurantes.csv")
-		vaciar_archivo("clientes.csv")
-		vaciar_archivo("rappitenderos.csv")
-		crear_archivos_binarios()
-		leer_binario("restaurantes_predefinido.bin", restaurantes)
-		leer_binario("clientes_predefinido.bin", clientes)
-		leer_binario("rappitenderos_predefinido.bin", rappitenderos)
+		vaciar_archivos_existentes()
+		crear_archivos_binarios() #En info_predefinida
+		leer_archivos_binarios()
+		sobreescribir_con_info_predefinida()
 		limpiar_pantalla()
 		mensaje_info('Se ha realizado una carga predefinida.\n')
-		guardar_datos(restaurantes, "restaurantes.csv")
-		guardar_datos(clientes, "clientes.csv")
-		guardar_datos(rappitenderos, "rappitenderos.csv")
 		return restaurantes, clientes, rappitenderos
 	print(mensaje_info("Volviendo al menu anterior..."))
+
+def vaciar_archivos_existentes():
+	vaciar_archivo("restaurantes.csv")
+	vaciar_archivo("clientes.csv")
+	vaciar_archivo("rappitenderos.csv")
+
+def leer_archivos_binarios():
+	leer_binario("restaurantes_predefinido.bin", restaurantes)
+	leer_binario("clientes_predefinido.bin", clientes)
+	leer_binario("rappitenderos_predefinido.bin", rappitenderos)
+
+def sobreescribir_con_info_predefinida():
+	guardar_datos(restaurantes, "restaurantes.csv")
+	guardar_datos(clientes, "clientes.csv")
+	guardar_datos(rappitenderos, "rappitenderos.csv")
 
 def leer_binario(nombre_archivo, diccionario_a_cargar):
 	with open(nombre_archivo, "rb") as arch:
