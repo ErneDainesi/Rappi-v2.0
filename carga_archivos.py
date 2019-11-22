@@ -1,4 +1,4 @@
-def guardar_datos(diccionario, nombre_del_archivo):
+def grabar_en_csv(diccionario, nombre_del_archivo):
     #Guarda los datos del diccionario pasado por parámetro en un archivo .csv
     with open(nombre_del_archivo, "a") as arch:
         escribir_encabezado(arch, nombre_del_archivo)
