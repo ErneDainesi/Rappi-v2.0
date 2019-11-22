@@ -2,7 +2,7 @@
 
 from imprimir_menus import limpiar_pantalla, mensaje_info, mensaje_solicitud
 from info_predefinida import crear_archivos_binarios
-from carga_archivos import guardar_datos, vaciar_archivo
+from carga_archivos import grabar_en_csv, vaciar_archivo
 import pickle
 
 def carga_predefinida(restaurantes, clientes, rappitenderos):
@@ -30,9 +30,9 @@ def leer_archivos_binarios():
 	leer_binario("rappitenderos_predefinido.bin", rappitenderos)
 
 def sobreescribir_con_info_predefinida():
-	guardar_datos(restaurantes, "restaurantes.csv")
-	guardar_datos(clientes, "clientes.csv")
-	guardar_datos(rappitenderos, "rappitenderos.csv")
+	grabar_en_csv(restaurantes, "restaurantes.csv")
+	grabar_en_csv(clientes, "clientes.csv")
+	grabar_en_csv(rappitenderos, "rappitenderos.csv")
 
 def leer_binario(nombre_archivo, diccionario_a_cargar):
 	with open(nombre_archivo, "rb") as arch:
