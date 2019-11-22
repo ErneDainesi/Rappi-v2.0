@@ -9,15 +9,6 @@ def ingresar_entre_rangos(inicio, fin):
 		opcion_elegida = ingresar_entero('Debe ingresar una opcion entre {} y {}: '.format(inicio, fin))
 	return opcion_elegida
 
-def mensaje_info(mensaje):
-	print("[INFO]", mensaje)
-
-def mensaje_solicitud(mensaje):
-	return input("[SOLICITUD]" + " " + mensaje)
-
-def mensaje_error(mensaje):
-	print("[ERROR]", mensaje)
-
 def ingresar_entero(mensaje):
 	entrada = ''
 	while type(entrada) != int:
