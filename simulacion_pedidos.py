@@ -2,7 +2,8 @@
 
 import random
 from pedido_manual import crear_pedido, asignar_pedido_a_rappitendero, calcular_rappicreditos_ganados, restaurantes_dentro_del_rango
-from imprimir_menus import limpiar_pantalla, ingresar_entero, mensaje_error
+from imprimir_menus import limpiar_pantalla, ingresar_entero
+from imprimir_mensaje import mensaje_error
 
 def simulacion_de_pedidos(clientes, restaurantes, rappitenderos):
 	limpiar_pantalla()
