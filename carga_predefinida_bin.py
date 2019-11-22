@@ -3,7 +3,8 @@
 #Todas estas funciones reciben los diccionarios vacios
 #Devuelven los diccionarios con la informacion 'hardcodeada'
 
-from imprimir_menus import limpiar_pantalla, mensaje_info, mensaje_solicitud
+from imprimir_menus import limpiar_pantalla
+from imprimir_mensaje import mensaje_info, mensaje_solicitud
 from info_predefinida import crear_archivos
 import pickle
 
