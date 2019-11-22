@@ -1,5 +1,6 @@
 from random import randint
-from imprimir_menus import limpiar_pantalla, mensaje_error, mensaje_info, mensaje_solicitud, ingresar_entre_rangos
+from imprimir_menus import limpiar_pantalla, ingresar_entre_rangos
+from imprimir_mensaje import mensaje_info, mensaje_error, mensaje_solicitud
 
 
 def cargar_restaurante(restaurantes):
