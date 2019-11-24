@@ -11,11 +11,11 @@ def carga_predefinida(restaurantes, clientes, rappitenderos):
 	mensaje_info("Si realiza una carga predefinida los datos anteriores se perderan.")
 	realizar_carga = mensaje_solicitud("Desea continuar? (s/n): ")
 	if realizar_carga == "s":
+		limpiar_pantalla()
 		vaciar_archivos_existentes()
 		crear_archivos_binarios() #En info_predefinida
 		leer_archivos_binarios(restaurantes, clientes, rappitenderos)
 		sobreescribir_con_info_predefinida(restaurantes, clientes, rappitenderos)
-		limpiar_pantalla()
 		mensaje_info('Se ha realizado una carga predefinida.\n')
 		return restaurantes, clientes, rappitenderos
 	print(mensaje_info("Volviendo al menu anterior..."))
