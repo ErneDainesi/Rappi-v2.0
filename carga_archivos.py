@@ -35,13 +35,13 @@ def escribir_encabezado(archivo, nombre_del_archivo):
         archivo.write("Nombre, Propina acumulada, Posicion actual, Pedido actual, Distancia recorrida\n")
 
 def vaciar_archivo(nombre_del_archivo):
-    try:
+    if not os.path.exists(nombre_del_archivo):
         arch = open(nombre_del_archivo, "w")
         arch.close()
-    except FileNotFoundError:
+    else:
         if nombre_del_archivo == "clientes.csv":
-            mensaje_info("No existe el archivo clientes, entonces no se sobreescribio la informacion.")
+            mensaje_info("No existe el archivo clientes, entonces no se sobreescribio informacion anterior.")
         elif nombre_del_archivo == "restaurantes.csv":
-            mensaje_info("No existe el archivo restaurantes, entonces no se sobreescribio la informacion.")
+            mensaje_info("No existe el archivo restaurantes, entonces no se sobreescribio informacion anterior.")
         elif nombre_del_archivo == "rappitenderos.csv":
-            mensaje_info("No existe el archivo rappitenderos, entonces no se sobreescribio la informacion.")
+            mensaje_info("No existe el archivo rappitenderos, entonces no se sobreescribio informacion anterior.")
