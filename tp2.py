@@ -71,7 +71,7 @@ def invocar_opcion_submenu(opcion_submenu, opcion_elegida, restaurantes, cliente
 		crear_informe(restaurantes, 'Restaurantes')
 	elif opcion_elegida == OPCION_MENU_INFORMES and opcion_submenu == 4:
 		limpiar_pantalla()
-		crear_archivo_rappitenderos(rappitenderos)
+		recorridos_rappitenderos(rappitenderos)
 
 #----------------------
 #------- CARGA --------
