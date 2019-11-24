@@ -35,7 +35,7 @@ def escribir_encabezado(archivo, nombre_del_archivo):
         archivo.write("Nombre, Propina acumulada, Posicion actual, Pedido actual, Distancia recorrida\n")
 
 def vaciar_archivo(nombre_del_archivo):
-    if not os.path.exists(nombre_del_archivo):
+    if os.path.exists(nombre_del_archivo):
         arch = open(nombre_del_archivo, "w")
         arch.close()
     else:
