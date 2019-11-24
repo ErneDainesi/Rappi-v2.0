@@ -12,7 +12,7 @@ def carga_predefinida(restaurantes, clientes, rappitenderos):
 	if realizar_carga == "s":
 		vaciar_archivos_existentes()
 		crear_archivos_binarios() #En info_predefinida
-		leer_archivos_binarios()
+		leer_archivos_binarios(restaurantes, clientes, rappitenderos)
 		sobreescribir_con_info_predefinida()
 		limpiar_pantalla()
 		mensaje_info('Se ha realizado una carga predefinida.\n')
@@ -24,7 +24,7 @@ def vaciar_archivos_existentes():
 	vaciar_archivo("clientes.csv")
 	vaciar_archivo("rappitenderos.csv")
 
-def leer_archivos_binarios():
+def leer_archivos_binarios(restaurantes, clientes, rappitenderos):
 	leer_binario("restaurantes_predefinido.bin", restaurantes)
 	leer_binario("clientes_predefinido.bin", clientes)
 	leer_binario("rappitenderos_predefinido.bin", rappitenderos)
