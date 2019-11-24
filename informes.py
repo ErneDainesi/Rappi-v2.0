@@ -37,7 +37,7 @@ def mostrar_listado(diccionario):
 		puesto += 1
 		print('{} - {} - ${}'.format(puesto, cliente[0], cliente[1]))
 
-def crear_archivo_rappitenderos(rappitenderos):
+def recorridos_rappitenderos(rappitenderos):
 	print('\n **** DISTANCIAS RECORRIDAS ****\n')
 	with open("recorridos_rappitenderos.csv", 'w') as archivo:
 		archivo.write("Nombre, Distancia recorrida(km)\n")
