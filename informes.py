@@ -40,7 +40,7 @@ def mostrar_listado(diccionario):
 def recorridos_rappitenderos(rappitenderos):
 	print('\n **** DISTANCIAS RECORRIDAS ****\n')
 	with open("recorridos_rappitenderos.csv", 'w') as archivo:
-		archivo.write("Nombre, Distancia recorrida(km)\n")
+		archivo.write("Nombre, Distancia recorrida(km)\n")#Encabezado del archivo
 		for rappitendero in rappitenderos:
 			archivo.write("{}, {}\n".format(rappitendero, round(rappitenderos[rappitendero]["Distancia recorrida"], 1)))
 			print("{}, {}km".format(rappitendero, round(rappitenderos[rappitendero]["Distancia recorrida"], 1)))
