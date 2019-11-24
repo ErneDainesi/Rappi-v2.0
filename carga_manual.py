@@ -1,6 +1,6 @@
 from random import randint
 from imprimir_menus import limpiar_pantalla, ingresar_entre_rangos
-from imprimir_mensaje import mensaje_info, mensaje_error, mensaje_solicitud
+from imprimir_mensaje import *
 from carga_archivos import actualizar_csv
 
 
