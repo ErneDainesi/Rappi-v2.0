@@ -1,6 +1,7 @@
 #MODULO CARGA PREDEFINIDA
 
-from imprimir_menus import limpiar_pantalla, mensaje_info, mensaje_solicitud
+from imprimir_menus import limpiar_pantalla
+from imprimir_mensaje import *
 from info_predefinida import crear_archivos_binarios
 from carga_archivos import grabar_en_csv, vaciar_archivo
 import pickle
