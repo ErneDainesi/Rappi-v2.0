@@ -1,6 +1,7 @@
 from random import randint
 from imprimir_menus import limpiar_pantalla, ingresar_entre_rangos
 from imprimir_mensaje import mensaje_info, mensaje_error, mensaje_solicitud
+from carga_archivos import actualizar_csv
 
 
 def cargar_restaurante(restaurantes):
@@ -16,6 +17,7 @@ def cargar_restaurante(restaurantes):
 
     restaurantes[nombre] = {'Direccion': direccion, 'Telefono': telefono, 'Posicion': (latitud, longitud),
                             'Radio de Entrega': radio_de_entrega, 'Platos': platos, 'Total de ventas': total_ventas}
+    actualizar_csv(restaurantes, nombre, "restaurantes.csv")
     mensaje_info("Su restaurante se ha cargado correctamente.")
     return restaurantes
 
@@ -99,6 +101,7 @@ def cargar_cliente(clientes):
     rappicreditos = ingresar_rappicreditos()
     clientes[nombre_usuario] = {'Contrasenia': contrasenia, 'Telefono': telefono, 'Direccion': direccion,
                                 'Posicion': coordenadas, 'Rappicreditos': rappicreditos}
+    actualizar_csv(clientes, nombre_usuario, "clientes.csv")
     limpiar_pantalla()
     mensaje_info("\nEl cliente se ha cargado correctamente.")
     return clientes
@@ -210,6 +213,7 @@ def cargar_rappitendero(rappitenderos, restaurantes):
     pedido_actual = None
     rappitenderos[nombre_rappitendero] = {'Propina acumulada': propina_acumulada, 'Posicion actual': coordenadas,
                                           'Pedido actual': pedido_actual}
+    actualizar_csv(rappitenderos, nombre_rappitendero, "rappitenderos.csv")
     limpiar_pantalla()
     mensaje_info("\nRappitendero cargado con exito.")
     return rappitenderos
