@@ -1,9 +1,22 @@
+import os.path
+
 def grabar_en_csv(diccionario, nombre_del_archivo):
     #Guarda los datos del diccionario pasado por parámetro en un archivo .csv
     with open(nombre_del_archivo, "a") as arch:
         escribir_encabezado(arch, nombre_del_archivo)
         for clave in diccionario:
             escribir_en_archivo(clave, diccionario, nombre_del_archivo, arch)
+
+def actualizar_csv(diccionario, clave, nombre_del_archivo):
+    if not os.path.exists(nombre_del_archivo): #Si no existe el archivo, escribe el encabezado.
+        archivo = open(nombre_del_archivo, "a")
+        escribir_encabezado(archivo, nombre_del_archivo)
+        escribir_en_archivo(clave, diccionario, nombre_del_archivo, archivo)
+        archivo.close()
+    else:
+        archivo = open(nombre_del_archivo, "a")
+        escribir_en_archivo(clave, diccionario, nombre_del_archivo, archivo)
+        archivo.close()
 
 def escribir_en_archivo(clave, diccionario, nombre_del_archivo, arch):
     if nombre_del_archivo == "clientes.csv":
