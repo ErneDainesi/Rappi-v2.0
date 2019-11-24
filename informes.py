@@ -41,7 +41,7 @@ def crear_archivo_rappitenderos(rappitenderos):
 	archivo = open("recorridos_rappitenderos.csv", 'w')
 	mensaje_info("El archivo a crear tendra la siguiente informacion (Nombre del rappitendero, kms recorridos):")
 	for rappitendero in rappitenderos:
-		archivo.write("{},{}\n".format(rappitendero, round(rappitenderos[rappitendero]["Distancia recorrida"], 1))))
-		print("{},{}".format(rappitendero, round(rappitenderos[rappitendero]["Distancia recorrida"], 1))))
+		archivo.write("{},{}\n".format(rappitendero, round(rappitenderos[rappitendero]["Distancia recorrida"], 1)))
+		print("{},{}".format(rappitendero, round(rappitenderos[rappitendero]["Distancia recorrida"], 1)))
 	mensaje_info("Se ha creado un archivo de formato .csv")
 	archivo.close()
