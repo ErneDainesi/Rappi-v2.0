@@ -145,11 +145,15 @@ def	calcular_demora(cliente, rappitendero_asignado, total_a_pagar, restaurante_e
 def entregar_pedido(cliente, rappitendero_asignado, total_a_pagar, restaurante_elegido, tiempo_estimado, simulacion):
 	rappitendero_asignado['Posicion actual'] = cliente['Posicion']
 	rappicreditos_ganados = calcular_rappicreditos_ganados(total_a_pagar)
+	propina_rappitendero = calcular_propina_rappitendero(total_a_pagar)
 	cliente['Rappicreditos'] += rappicreditos_ganados
 	restaurante_elegido['Total de ventas'] += (total_a_pagar * 0.95)
-	rappitendero_asignado['Propina acumulada'] += (total_a_pagar * 0.05)
+	rappitendero_asignado['Propina acumulada'] += propina_rappitendero
 	rappitendero_asignado['Pedido actual'] = {'Pedido': [], 'Destino': ''}
 	informar_sobre_pedido(simulacion, tiempo_estimado, total_a_pagar, rappicreditos_ganados)
+
+def calcular_propina_rappitendero(total_a_pagar):
+	return total_a_pagar * 0.05
 
 def calcular_rappicreditos_ganados(total_a_pagar):
 	rappicreditos_ganados = 0
