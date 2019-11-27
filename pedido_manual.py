@@ -159,7 +159,7 @@ def calcular_rappicreditos_ganados(total_a_pagar):
 	rappicreditos_ganados = 0
 	if total_a_pagar < 200:
 		rappicreditos_ganados = (total_a_pagar * 0.05)
-	elif (total_a_pagar >= 200) and (total_a_pagar < 500):
+	elif (total_a_pagar >= 200) and (total_a_pagar < 1000):
 		rappicreditos_ganados = (total_a_pagar * 0.1)
 	else:
 		rappicreditos_ganados = (total_a_pagar * 0.15)
