@@ -2,12 +2,46 @@ import os.path
 import pickle
 from imprimir_mensaje import *
 
+def cargar_archivos():
+    restaurantes, clientes, rappitenderos = dict(), dict(), dict()
+    cargar_datos_csv("restaurantes.csv", restaurantes)
+    cargar_datos_csv("clientes.csv", clientes)
+    cargar_datos_csv("rappitenderos.csv", rappitenderos)
+    return restaurantes, clientes, rappitenderos
+
+def cargar_datos_csv(nombre_csv, diccionario):
+    try:
+        corte = []
+        with open(nombre_csv) as archivo:
+            next(archivo) #saltea el encabezado
+            linea = leer_csv(archivo, corte)
+            while linea != corte:
+                cargar_diccionario_csv(linea, archivo, diccionario, nombre_csv)
+                linea = leer_csv(archivo, corte)
+        return diccionario
+    except FileNotFoundError:
+        return diccionario
+
+def leer_csv(archivo, corte):
+    linea = archivo.readline()
+    lista = linea.rstrip().split(',')
+    return lista if linea else corte
+
 def grabar_en_csv(diccionario, nombre_del_archivo):
     #Guarda los datos del diccionario pasado por parámetro en un archivo .csv
     with open(nombre_del_archivo, "a") as arch:
         escribir_encabezado(arch, nombre_del_archivo)
         for clave in diccionario:
             escribir_en_archivo(clave, diccionario, nombre_del_archivo, arch)
+
+def cargar_diccionario_csv(linea, archivo, diccionario, nombre_csv):
+    if nombre_csv == "restaurantes_predefinido.bin":
+        diccionario[linea[0]] = {'Direccion' : linea[1], 'Telefono' : linea[2], 'Posicion': (float(linea[3]), float(linea[4])), 'Radio de Entrega': float(linea[5]), 'Platos': linea[6], 'Total de ventas' : float(linea[7])}
+    elif nombre_csv == "clientes_predefinido.bin":
+        diccionario[linea[0]] = {'Contrasenia' : linea[1], 'Telefono' : linea[2], 'Direccion' : linea[3], 'Posicion' : (float(linea[4]), float(linea[5])), 'Rappicreditos' : float(linea[6])}
+    elif nombre_csv == "rappitenderos_predefinido.bin":
+        diccionario[linea[0]] = {'Propina acumulada' : float(linea[1]), 'Posicion actual' : (float(linea[2]), float(linea[3])), 'Pedido actual' : linea[4], 'Distancia recorrida' : float(linea[5])}
+
 
 def actualizar_csv(diccionario, clave, nombre_del_archivo):
     if not os.path.exists(nombre_del_archivo): #Si no existe el archivo, escribe el encabezado.
@@ -62,36 +96,3 @@ def cargar_diccionario_info_predefinida(nombre_archivo, dato, diccionario):
     elif nombre_archivo == "rappitenderos_predefinido.bin":
         for nombre, propina_acumulada, posicion_actual, pedido_actual, distancia_recorrida in zip(dato[0], dato[1], dato[2], dato[3], dato[4]):
             diccionario[nombre] = {'Propina acumulada' : propina_acumulada, 'Posicion actual' : posicion_actual, 'Pedido actual' : pedido_actual, 'Distancia recorrida' : distancia_recorrida}
-
-def cargar_archivos():
-    restaurantes, clientes, rappitenderos = dict(), dict(), dict()
-    cargar_datos_csv("restaurantes.csv", restaurantes)
-    cargar_datos_csv("clientes.csv", clientes)
-    cargar_datos_csv("rappitenderos.csv", rappitenderos)
-    return restaurantes, clientes, rappitenderos
-
-def cargar_datos_csv(nombre_csv, diccionario):
-    try:
-        corte = []
-        with open(nombre_csv) as archivo:
-            next(archivo) #saltea el encabezado
-            linea = leer_csv(archivo, corte)
-            while linea != corte:
-                cargar_diccionario_csv(linea, archivo, diccionario, nombre_csv)
-                linea = leer_csv(archivo, corte)
-        return diccionario
-    except FileNotFoundError:
-        return diccionario
-
-def leer_csv(archivo, corte):
-    linea = archivo.readline()
-    lista = linea.rstrip().split(',')
-    return lista if linea else corte
-
-def cargar_diccionario_csv(linea, archivo, diccionario, nombre_csv):
-    if nombre_csv == "restaurantes_predefinido.bin":
-        diccionario[linea[0]] = {'Direccion' : linea[1], 'Telefono' : linea[2], 'Posicion': (float(linea[3]), float(linea[4])), 'Radio de Entrega': float(linea[5]), 'Platos': linea[6], 'Total de ventas' : float(linea[7])}
-    elif nombre_csv == "clientes_predefinido.bin":
-        diccionario[linea[0]] = {'Contrasenia' : linea[1], 'Telefono' : linea[2], 'Direccion' : linea[3], 'Posicion' : (float(linea[4]), float(linea[5])), 'Rappicreditos' : float(linea[6])}
-    elif nombre_csv == "rappitenderos_predefinido.bin":
-        diccionario[linea[0]] = {'Propina acumulada' : float(linea[1]), 'Posicion actual' : (float(linea[2]), float(linea[3])), 'Pedido actual' : linea[4], 'Distancia recorrida' : float(linea[5])}
