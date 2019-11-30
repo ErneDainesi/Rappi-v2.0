@@ -2,17 +2,17 @@
 
 import random
 from pedido_manual import crear_pedido, asignar_pedido_a_rappitendero, calcular_rappicreditos_ganados, restaurantes_dentro_del_rango
-from imprimir_menus import limpiar_pantalla, ingresar_entero
-from imprimir_mensaje import mensaje_error
+from imprimir_menus import limpiar_pantalla
+from mensajes_y_validaciones import mensaje_error, ingresar_entero_o_flotante
 
 def simulacion_de_pedidos(clientes, restaurantes, rappitenderos):
 	limpiar_pantalla()
 	print("\n **** SIMULACION DE PEDIDOS ****\n")
-	cantidad_simulaciones = ingresar_entero("Puede simular entre 1 y 100 pedidos. Ingrese la cantidad: ")
+	cantidad_simulaciones =  ingresar_entero_o_flotante("Puede simular entre 1 y 100 pedidos. Ingrese la cantidad: ", int)
 	while cantidad_simulaciones < 1 or cantidad_simulaciones > 100:
 		mensaje_error("La cantidad ingresada es invalida.")
-		cantidad_simulaciones = ingresar_entero("Puede simular entre 1 y 100 pedidos. Ingrese la cantidad: ")
-	max_porciones = ingresar_entero("Ingrese una cantidad maxima de porciones por plato: ")
+		cantidad_simulaciones =  ingresar_entero_o_flotante("Puede simular entre 1 y 100 pedidos. Ingrese la cantidad: ", int)
+	max_porciones = ingresar_entero_o_flotante("Ingrese una cantidad maxima de porciones por plato: ", int)
 	limpiar_pantalla()
 	generar_simulaciones(cantidad_simulaciones, max_porciones, clientes, restaurantes, rappitenderos)
 		
