@@ -1,24 +1,5 @@
 #MODULO PARA IMPRIMIR MENUS
 import os
-from imprimir_mensaje import mensaje_error, mensaje_solicitud
-
-def ingresar_entre_rangos(inicio, fin):
-	#Recibe el inicio y el fin de un rango que se desea ingresar un numero entre
-	opcion_elegida = ingresar_entero('Ingrese una opcion entre {} y {}: '.format(inicio, fin))
-	while opcion_elegida > fin or opcion_elegida < inicio:
-		mensaje_error("La opcion esta fuera del rango pedido.")
-		opcion_elegida = ingresar_entero('Debe ingresar una opcion entre {} y {}: '.format(inicio, fin))
-	return opcion_elegida
-
-def ingresar_entero(mensaje):
-	entrada = ''
-	while type(entrada) != int:
-		entrada = mensaje_solicitud(mensaje)
-		try:
-			entrada = int(entrada)
-			return entrada
-		except ValueError:
-			mensaje_error("Debe ingresar un numero entero.")
 
 def limpiar_pantalla():
 	if os.name == "nt":
