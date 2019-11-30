@@ -2,8 +2,8 @@
 import random
 import math
 from haversine import haversine
-from imprimir_menus import limpiar_pantalla, ingresar_entero, ingresar_entre_rangos
-from imprimir_mensaje import *
+from imprimir_menus import limpiar_pantalla
+from mensajes_y_validaciones import *
 
 def pedido_manual(clientes, restaurantes, rappitenderos):
 	print('\n**** INICIO DE SESION ****\n')
@@ -104,13 +104,6 @@ def plato_ya_esta_en_pedido(plato, pedido):
 		if plato in pedido['Pedido'][i]:
 			return i
 	return -1
-
-def pedir_numero_entero_positivo(mensaje):
-	numero = ingresar_entero(mensaje)
-	while numero < 1:
-		mensaje_error("La cantidad debe ser mayor a cero.")
-		numero = ingresar_entero('Vuelva a intentarlo: ')
-	return numero
 
 def asignar_pedido_a_rappitendero(cliente, restaurante_elegido, rappitenderos, pedido, total_a_pagar, simulacion):
 	rappitendero_asignado, distancia_al_restaurante = calcular_rappitendero_mas_cercano(restaurante_elegido, rappitenderos)
