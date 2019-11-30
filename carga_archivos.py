@@ -5,7 +5,7 @@ from imprimir_mensaje import *
 def cargar_archivos():
     restaurantes, clientes, rappitenderos = dict(), dict(), dict()
     cargar_datos_csv("restaurantes.csv", restaurantes)
-    cargar_menus(restaurantes)
+    cargar_menus_csv(restaurantes)
     cargar_datos_csv("clientes.csv", clientes)
     cargar_datos_csv("rappitenderos.csv", rappitenderos)
     return restaurantes, clientes, rappitenderos
@@ -53,15 +53,6 @@ def cargar_diccionario_csv(linea, diccionario, nombre_csv):
     elif nombre_csv == "rappitenderos.csv":
         diccionario[linea[0]] = {'Propina acumulada' : float(linea[1]), 'Posicion actual' : (float(linea[2]), float(linea[3])), 'Pedido actual' : linea[4], 'Distancia recorrida' : float(linea[5])}
 
-def actualizar_csv(diccionario, clave, nombre_del_archivo):
-    if not os.path.exists(nombre_del_archivo): #Si no existe el archivo, escribe el encabezado.
-        archivo = open(nombre_del_archivo, "a")
-        escribir_encabezado(archivo, nombre_del_archivo)
-    else:
-        archivo = open(nombre_del_archivo, "a")
-    escribir_en_archivo(clave, diccionario, nombre_del_archivo, archivo)
-    archivo.close()
-
 def escribir_encabezado(archivo, nombre_del_archivo):
     if nombre_del_archivo == "clientes.csv":
         archivo.write("Nombre,Contrasenia,Telefono,Direccion,Latitud,Longitud,Rappicreditos\n")
@@ -91,7 +82,7 @@ def escribir_menu(restaurantes, menus_csv):
         for plato in restaurantes[restaurante]["Platos"]:
             menus_csv.write("{},{},{}\n".format(restaurante, plato[0], plato[1]))
 
-def cargar_menus(restaurantes):
+def cargar_menus_csv(restaurantes):
     try:
         corte = ['','',999999999999]
         platos = []
