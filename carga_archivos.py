@@ -97,14 +97,14 @@ def cargar_menus(restaurantes):
 def corte_de_control_menus(platos, linea, corte, restaurantes, menus_csv):
     while linea != corte:
         restaurante = linea[0]
-        restaurantes[restaurante]["Platos"] = cargar_a_restaurante(linea, platos)
+        restaurantes[restaurante]["Platos"] = cargar_plato_a_restaurante(linea, platos)
         linea = leer_csv(menus_csv, corte)
         while restaurante == linea[0]: #Mientras siga siendo el mismo restaurante, carga los platos al diccionario
-            restaurantes[restaurante]["Platos"] = cargar_a_restaurante(linea, platos)
+            restaurantes[restaurante]["Platos"] = cargar_plato_a_restaurante(linea, platos)
             linea = leer_csv(menus_csv, corte)
         platos = [] #Si no es el mismo dic, vacio la lista para volver a llenarla con los platos del proximo restaurante
 
-def cargar_a_restaurante(linea, platos):
+def cargar_plato_a_restaurante(linea, platos):
     plato = (linea[1], float(linea[2]))
     platos.append(plato)
     return platos
