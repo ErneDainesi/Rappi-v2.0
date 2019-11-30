@@ -62,7 +62,6 @@ def escribir_encabezado(archivo, nombre_del_archivo):
     elif nombre_del_archivo == "menu_restaurantes.csv":
         archivo.write("Restaurante,Plato,Precio\n")
 
-
 def escribir_en_archivo(clave, diccionario, nombre_del_archivo, arch):
     if nombre_del_archivo == "clientes.csv":
         arch.write("{},{},{},{},{},{},{}\n".format(clave, diccionario[clave]["Contrasenia"], diccionario[clave]["Telefono"], diccionario[clave]["Direccion"], diccionario[clave]["Posicion"][0], diccionario[clave]["Posicion"][1], diccionario[clave]["Rappicreditos"]))
@@ -71,6 +70,44 @@ def escribir_en_archivo(clave, diccionario, nombre_del_archivo, arch):
     elif nombre_del_archivo == "rappitenderos.csv":
         arch.write("{},{},{},{},{},{}\n".format(clave, diccionario[clave]["Propina acumulada"], diccionario[clave]["Posicion actual"][0], diccionario[clave]["Posicion actual"][1], diccionario[clave]["Pedido actual"], diccionario[clave]["Distancia recorrida"]))
 
+def platos_csv(restaurantes):
+    menus_csv = open("menu_restaurantes.csv", "w")
+    escribir_encabezado(menus_csv, "menu_restaurantes.csv")
+    escribir_menu(restaurantes, menus_csv)
+    menus_csv.close()
+
+def escribir_menu(restaurantes, menus_csv):
+    for restaurante in restaurantes:
+        for plato in restaurantes[restaurante]["Platos"]:
+            menus_csv.write("{},{},{}\n".format(restaurante, plato[0], plato[1]))
+
+def cargar_menus(restaurantes):
+    try:
+        corte = ['','',999999999999]
+        platos = []
+        with open("menu_restaurantes.csv") as menus_csv:
+            next(menus_csv)
+            linea = leer_csv(menus_csv, corte)
+            corte_de_control_menus(platos, linea, corte, restaurantes, menus_csv)
+    except FileNotFoundError:
+        #Puse un pass porque si no encuentra el archivo, significa que no hay restaurantes cargados en memoria
+        #Entonces no tengo platos para cargar a los diccionarios
+        pass
+
+def corte_de_control_menus(platos, linea, corte, restaurantes, menus_csv):
+    while linea != corte:
+        restaurante = linea[0]
+        restaurantes[restaurante]["Platos"] = cargar_a_restaurante(linea, platos)
+        linea = leer_csv(menus_csv, corte)
+        while restaurante == linea[0]: #Mientras siga siendo el mismo restaurante, carga los platos al diccionario
+            restaurantes[restaurante]["Platos"] = cargar_a_restaurante(linea, platos)
+            linea = leer_csv(menus_csv, corte)
+        platos = [] #Si no es el mismo dic, vacio la lista para volver a llenarla con los platos del proximo restaurante
+
+def cargar_a_restaurante(linea, platos):
+    plato = (linea[1], float(linea[2]))
+    platos.append(plato)
+    return platos
 
 def vaciar_archivo(nombre_del_archivo):
     if os.path.exists(nombre_del_archivo):
@@ -100,37 +137,3 @@ def cargar_diccionario_info_predefinida(nombre_archivo, dato, diccionario):
     elif nombre_archivo == "rappitenderos_predefinido.bin":
         for nombre, propina_acumulada, posicion_actual, pedido_actual, distancia_recorrida in zip(dato[0], dato[1], dato[2], dato[3], dato[4]):
             diccionario[nombre] = {'Propina acumulada' : propina_acumulada, 'Posicion actual' : posicion_actual, 'Pedido actual' : pedido_actual, 'Distancia recorrida' : distancia_recorrida}
-
-def platos_csv(restaurantes):
-    menus_csv = open("menu_restaurantes.csv", "w")
-    escribir_encabezado(menus_csv, "menu_restaurantes.csv")
-    escribir_menu(restaurantes, menus_csv)
-    menus_csv.close()
-
-def escribir_menu(restaurantes, menus_csv):
-    for restaurante in restaurantes:
-        for plato in restaurantes[restaurante]["Platos"]:
-            menus_csv.write("{},{},{}\n".format(restaurante, plato[0], plato[1]))
-
-def cargar_menus(restaurantes):
-    try:
-        corte = ['','',999999999999]
-        platos = []
-        with open("menu_restaurantes.csv") as menus_csv:
-            next(menus_csv)
-            linea = leer_csv(menus_csv, corte)
-            while linea != corte:
-                restaurante = linea[0]
-                restaurantes[restaurante]["Platos"] = cargar_a_restaurante(linea, platos)
-                linea = leer_csv(menus_csv, corte)
-                while restaurante == linea[0]:
-                    restaurantes[restaurante]["Platos"] = cargar_a_restaurante(linea, platos)
-                    linea = leer_csv(menus_csv, corte)
-                platos = []
-    except FileNotFoundError:
-        pass
-
-def cargar_a_restaurante(linea, platos):
-    plato = (linea[1], float(linea[2]))
-    platos.append(plato)
-    return platos
