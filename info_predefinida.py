@@ -34,7 +34,7 @@ def info_rappitenderos():
 	nombre = ['Roberto', 'Juan', 'Carlos', 'Alberto', 'Javier']
 	propina_acumulada = [52.50, 143.25, 345.00, 283.25, 150.00]
 	posicion_actual = [(-34.5504, -58.4643), (-34.5674, -58.4549), (-34.5585, -58.4668), (-34.5644, -58.4543), (-34.5712, -58.4232)]
-	pedido_actual = [{'Pedido' : [], 'Destino' : ''}, {'Pedido' : [], 'Destino' : ''}, {'Pedido' : [], 'Destino' : ''}, {'Pedido' : [], 'Destino' : ''}, {'Pedido' : [], 'Destino' : ''}]
+	pedido_actual = [None, None, None, None, None]
 	distancia_recorrida = [0.0, 0.0, 0.0, 0.0, 0.0]
 	datos_rappitenderos = [nombre, propina_acumulada, posicion_actual, pedido_actual, distancia_recorrida]
 	generar_archivo_binario(datos_rappitenderos, "rappitenderos_predefinido.bin")
