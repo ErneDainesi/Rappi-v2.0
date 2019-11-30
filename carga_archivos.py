@@ -1,6 +1,6 @@
 import os.path
 import pickle
-from mensajes_y_validaciones import *
+from mensajes_y_validaciones import mensaje_info
 
 def cargar_archivos():
     restaurantes, clientes, rappitenderos = dict(), dict(), dict()
