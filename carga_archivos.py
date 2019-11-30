@@ -35,11 +35,11 @@ def grabar_en_csv(diccionario, nombre_del_archivo):
             escribir_en_archivo(clave, diccionario, nombre_del_archivo, arch)
 
 def cargar_diccionario_csv(linea, archivo, diccionario, nombre_csv):
-    if nombre_csv == "restaurantes_predefinido.bin":
+    if nombre_csv == "restaurantes.csv":
         diccionario[linea[0]] = {'Direccion' : linea[1], 'Telefono' : linea[2], 'Posicion': (float(linea[3]), float(linea[4])), 'Radio de Entrega': float(linea[5]), 'Platos': linea[6], 'Total de ventas' : float(linea[7])}
-    elif nombre_csv == "clientes_predefinido.bin":
+    elif nombre_csv == "clientes.csv":
         diccionario[linea[0]] = {'Contrasenia' : linea[1], 'Telefono' : linea[2], 'Direccion' : linea[3], 'Posicion' : (float(linea[4]), float(linea[5])), 'Rappicreditos' : float(linea[6])}
-    elif nombre_csv == "rappitenderos_predefinido.bin":
+    elif nombre_csv == "rappitenderos.csv":
         diccionario[linea[0]] = {'Propina acumulada' : float(linea[1]), 'Posicion actual' : (float(linea[2]), float(linea[3])), 'Pedido actual' : linea[4], 'Distancia recorrida' : float(linea[5])}
 
 
