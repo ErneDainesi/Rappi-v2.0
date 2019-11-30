@@ -1,5 +1,6 @@
 #MODULO PARA IMPRIMIR MENUS
 import os
+from imprimir_mensaje import mensaje_error, mensaje_solicitud
 
 def ingresar_entre_rangos(inicio, fin):
 	#Recibe el inicio y el fin de un rango que se desea ingresar un numero entre
