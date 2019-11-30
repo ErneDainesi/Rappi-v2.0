@@ -29,3 +29,10 @@ def ingresar_entero_o_flotante(mensaje, tipo_de_dato):
                 mensaje_error("Debe ingresar un numero entero.")
             elif tipo_de_dato == float:
                 mensaje_error("Debe ingresar un numero flotante.")
+
+def pedir_numero_entero_positivo(mensaje):
+    numero = ingresar_entero_o_flotante(mensaje, int)
+    while numero < 1:
+        mensaje_error("La cantidad debe ser mayor a cero.")
+        numero = ingresar_entero_o_flotante('Vuelva a intentarlo: ', int)
+    return numero
