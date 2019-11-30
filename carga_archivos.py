@@ -5,6 +5,7 @@ from imprimir_mensaje import *
 def cargar_archivos():
     restaurantes, clientes, rappitenderos = dict(), dict(), dict()
     cargar_datos_csv("restaurantes.csv", restaurantes)
+    cargar_menus(restaurantes)
     cargar_datos_csv("clientes.csv", clientes)
     cargar_datos_csv("rappitenderos.csv", rappitenderos)
     return restaurantes, clientes, rappitenderos
@@ -16,7 +17,7 @@ def cargar_datos_csv(nombre_csv, diccionario):
             next(archivo) #saltea el encabezado
             linea = leer_csv(archivo, corte)
             while linea != corte:
-                cargar_diccionario_csv(linea, archivo, diccionario, nombre_csv)
+                cargar_diccionario_csv(linea, diccionario, nombre_csv)
                 linea = leer_csv(archivo, corte)
         return diccionario
     except FileNotFoundError:
@@ -34,14 +35,13 @@ def grabar_en_csv(diccionario, nombre_del_archivo):
         for clave in diccionario:
             escribir_en_archivo(clave, diccionario, nombre_del_archivo, arch)
 
-def cargar_diccionario_csv(linea, archivo, diccionario, nombre_csv):
+def cargar_diccionario_csv(linea, diccionario, nombre_csv):
     if nombre_csv == "restaurantes.csv":
-        diccionario[linea[0]] = {'Direccion' : linea[1], 'Telefono' : linea[2], 'Posicion': (float(linea[3]), float(linea[4])), 'Radio de Entrega': float(linea[5]), 'Platos': linea[6], 'Total de ventas' : float(linea[7])}
+        diccionario[linea[0]] = {'Direccion' : linea[1], 'Telefono' : linea[2], 'Posicion': (float(linea[3]), float(linea[4])), 'Radio de Entrega': float(linea[5]), 'Total de ventas' : float(linea[6])}
     elif nombre_csv == "clientes.csv":
         diccionario[linea[0]] = {'Contrasenia' : linea[1], 'Telefono' : linea[2], 'Direccion' : linea[3], 'Posicion' : (float(linea[4]), float(linea[5])), 'Rappicreditos' : float(linea[6])}
     elif nombre_csv == "rappitenderos.csv":
         diccionario[linea[0]] = {'Propina acumulada' : float(linea[1]), 'Posicion actual' : (float(linea[2]), float(linea[3])), 'Pedido actual' : linea[4], 'Distancia recorrida' : float(linea[5])}
-
 
 def actualizar_csv(diccionario, clave, nombre_del_archivo):
     if not os.path.exists(nombre_del_archivo): #Si no existe el archivo, escribe el encabezado.
@@ -59,14 +59,18 @@ def escribir_encabezado(archivo, nombre_del_archivo):
         archivo.write("Nombre,Direccion,Telefono,Latitud,Longitud,Radio de entrega,Platos,Total de ventas\n")
     elif nombre_del_archivo == "rappitenderos.csv":
         archivo.write("Nombre,Propina acumulada,Latitud,Longitud,Pedido actual,Distancia recorrida\n")
+    elif nombre_del_archivo == "menu_restaurantes.csv":
+        archivo.write("Restaurante,Plato,Precio\n")
+
 
 def escribir_en_archivo(clave, diccionario, nombre_del_archivo, arch):
     if nombre_del_archivo == "clientes.csv":
         arch.write("{},{},{},{},{},{},{}\n".format(clave, diccionario[clave]["Contrasenia"], diccionario[clave]["Telefono"], diccionario[clave]["Direccion"], diccionario[clave]["Posicion"][0], diccionario[clave]["Posicion"][1], diccionario[clave]["Rappicreditos"]))
     elif nombre_del_archivo == "restaurantes.csv":
-        arch.write("{},{},{},{},{},{},{},{}\n".format(clave, diccionario[clave]["Direccion"], diccionario[clave]["Telefono"], diccionario[clave]["Posicion"][0], diccionario[clave]["Posicion"][1], diccionario[clave]["Radio de Entrega"], diccionario[clave]["Platos"], diccionario[clave]["Total de ventas"]))
+        arch.write("{},{},{},{},{},{},{}\n".format(clave, diccionario[clave]["Direccion"], diccionario[clave]["Telefono"], diccionario[clave]["Posicion"][0], diccionario[clave]["Posicion"][1], diccionario[clave]["Radio de Entrega"], diccionario[clave]["Total de ventas"]))
     elif nombre_del_archivo == "rappitenderos.csv":
         arch.write("{},{},{},{},{},{}\n".format(clave, diccionario[clave]["Propina acumulada"], diccionario[clave]["Posicion actual"][0], diccionario[clave]["Posicion actual"][1], diccionario[clave]["Pedido actual"], diccionario[clave]["Distancia recorrida"]))
+
 
 def vaciar_archivo(nombre_del_archivo):
     if os.path.exists(nombre_del_archivo):
@@ -96,3 +100,37 @@ def cargar_diccionario_info_predefinida(nombre_archivo, dato, diccionario):
     elif nombre_archivo == "rappitenderos_predefinido.bin":
         for nombre, propina_acumulada, posicion_actual, pedido_actual, distancia_recorrida in zip(dato[0], dato[1], dato[2], dato[3], dato[4]):
             diccionario[nombre] = {'Propina acumulada' : propina_acumulada, 'Posicion actual' : posicion_actual, 'Pedido actual' : pedido_actual, 'Distancia recorrida' : distancia_recorrida}
+
+def platos_csv(restaurantes):
+    menus_csv = open("menu_restaurantes.csv", "w")
+    escribir_encabezado(menus_csv, "menu_restaurantes.csv")
+    escribir_menu(restaurantes, menus_csv)
+    menus_csv.close()
+
+def escribir_menu(restaurantes, menus_csv):
+    for restaurante in restaurantes:
+        for plato in restaurantes[restaurante]["Platos"]:
+            menus_csv.write("{},{},{}\n".format(restaurante, plato[0], plato[1]))
+
+def cargar_menus(restaurantes):
+    try:
+        corte = ['','',999999999999]
+        platos = []
+        with open("menu_restaurantes.csv") as menus_csv:
+            next(menus_csv)
+            linea = leer_csv(menus_csv, corte)
+            while linea != corte:
+                restaurante = linea[0]
+                restaurantes[restaurante]["Platos"] = cargar_a_restaurante(linea, platos)
+                linea = leer_csv(menus_csv, corte)
+                while restaurante == linea[0]:
+                    restaurantes[restaurante]["Platos"] = cargar_a_restaurante(linea, platos)
+                    linea = leer_csv(menus_csv, corte)
+                platos = []
+    except FileNotFoundError:
+        pass
+
+def cargar_a_restaurante(linea, platos):
+    plato = (linea[1], float(linea[2]))
+    platos.append(plato)
+    return platos
