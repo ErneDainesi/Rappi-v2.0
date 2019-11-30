@@ -10,6 +10,16 @@ def cargar_archivos():
     cargar_datos_csv("rappitenderos.csv", rappitenderos)
     return restaurantes, clientes, rappitenderos
 
+def guardar_datos_antes_de_salir(restaurantes, clientes, rappitenderos):
+    #Guarda todos los datos de los diccionarios hasta el momento de uso con la info más actual
+    vaciar_archivo("restaurantes.csv")
+    vaciar_archivo("clientes.csv")
+    vaciar_archivo("rappitenderos.csv")
+    grabar_en_csv(restaurantes, "restaurantes.csv")
+    platos_csv(restaurantes)
+    grabar_en_csv(clientes, "clientes.csv")
+    grabar_en_csv(rappitenderos, "rappitenderos.csv")
+
 def cargar_datos_csv(nombre_csv, diccionario):
     try:
         corte = []
@@ -56,7 +66,7 @@ def escribir_encabezado(archivo, nombre_del_archivo):
     if nombre_del_archivo == "clientes.csv":
         archivo.write("Nombre,Contrasenia,Telefono,Direccion,Latitud,Longitud,Rappicreditos\n")
     elif nombre_del_archivo == "restaurantes.csv":
-        archivo.write("Nombre,Direccion,Telefono,Latitud,Longitud,Radio de entrega,Platos,Total de ventas\n")
+        archivo.write("Nombre,Direccion,Telefono,Latitud,Longitud,Radio de entrega,Total de ventas\n")
     elif nombre_del_archivo == "rappitenderos.csv":
         archivo.write("Nombre,Propina acumulada,Latitud,Longitud,Pedido actual,Distancia recorrida\n")
     elif nombre_del_archivo == "menu_restaurantes.csv":
