@@ -1,5 +1,5 @@
 from random import randint
-from imprimir_menus import limpiar_pantalla, ingresar_entre_rangos
+from imprimir_menus import limpiar_pantalla
 from imprimir_mensaje import *
 
 
@@ -10,8 +10,8 @@ def cargar_restaurante(restaurantes):
     direccion = ingresar_direccion("restaurante")
     telefono = ingresar_telefono("restaurante")
     latitud, longitud = ingresar_coordenadas("restaurante")
-    radio_de_entrega = ingresar_flotante("Ingrese el radio de entrega del restaurante: ")
-    total_ventas = ingresar_flotante("Ingrese el total de ventas del restaurante: ")
+    radio_de_entrega = ingresar_entero_o_flotante("Ingrese el radio de entrega del restaurante: ", float)
+    total_ventas = ingresar_entero_o_flotante("Ingrese el total de ventas del restaurante: ", float)
     platos = cargar_plato()
 
     restaurantes[nombre] = {'Direccion': direccion, 'Telefono': telefono, 'Posicion': (latitud, longitud),
@@ -19,19 +19,9 @@ def cargar_restaurante(restaurantes):
     mensaje_info("Su restaurante se ha cargado correctamente.")
     return restaurantes
 
-def ingresar_flotante(indicacion):
-    entrada = ''
-    while type(entrada) != float:
-        entrada = mensaje_solicitud(indicacion)
-        try:
-            entrada = float(entrada)
-            return entrada
-        except ValueError:
-            mensaje_error("Debe ingresar un numero flotante.")
-
 def ingresar_coordenadas(entidad):
-    latitud = ingresar_flotante("Ingrese la latitud del " + entidad + ": ")
-    longitud = ingresar_flotante("Ingrese la longitud del " + entidad + ": ")
+    latitud = ingresar_entero_o_flotante("Ingrese la latitud del " + entidad + ": ", float)
+    longitud = ingresar_entero_o_flotante("Ingrese la longitud del " + entidad + ": ", float)
     return latitud, longitud
 
 def ingresar_telefono(entidad):
@@ -149,7 +139,7 @@ def confirmar_contrasenia(contrasenia):
 
 
 def ingresar_rappicreditos():
-    rappicreditos = ingresar_flotante("Ingrese los rappicreditos del cliente: ")
+    rappicreditos = ingresar_entero_o_flotante("Ingrese los rappicreditos del cliente: ", float)
     return rappicreditos
 
 
@@ -163,10 +153,10 @@ def cargar_plato():
         while len(nombre_plato) > 25 or len(nombre_plato) < 5:
             mensaje_error("Debe ingresar un nombre que posea entre 5 y 25 caracteres\n")
             nombre_plato = mensaje_solicitud("\nIngrese nuevamente el nombre del plato: ")
-        precio_plato = ingresar_flotante("Ingrese el precio del plato: ")
+        precio_plato = ingresar_entero_o_flotante("Ingrese el precio del plato: ", float)
         while precio_plato <= 0:
             mensaje_error("La cantidad a ingresar debe ser mayor a cero.")
-            precio_plato = ingresar_flotante('Ingrese el precio del plato: ')
+            precio_plato = ingresar_entero_o_flotante("Ingrese el precio del plato: ", float)
         platos_nuevos.append((nombre_plato, precio_plato))
         mensaje_info("\nSu plato se ha cargado correctamente.")
         cargar_plato = mensaje_solicitud("\nIngrese 's' para cargar otro plato o presione otra tecla para finalizar la carga: ")
@@ -205,7 +195,7 @@ def cargar_rappitendero(rappitenderos, restaurantes):
     limpiar_pantalla()
     print("\n **** CARGA RAPPITENDERO **** \n")
     nombre_rappitendero = mensaje_solicitud("Ingrese el nombre del rappitendero: ")
-    propina_acumulada = ingresar_flotante("Ingrese la propina acumulada: ")
+    propina_acumulada = ingresar_entero_o_flotante("Ingrese la propina acumulada: ", float)
     coordenadas = restaurantes[elegir_restaurante_al_azar(restaurantes)]['Posicion']
     pedido_actual = None
     rappitenderos[nombre_rappitendero] = {'Propina acumulada': propina_acumulada, 'Posicion actual': coordenadas,
