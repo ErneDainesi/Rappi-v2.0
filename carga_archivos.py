@@ -83,17 +83,13 @@ def escribir_menu(restaurantes, menus_csv):
             menus_csv.write("{},{},{}\n".format(restaurante, plato[0], plato[1]))
 
 def cargar_menus_csv(restaurantes):
-    try:
+    if os.path.exists("menu_restaurantes.csv"):
         corte = ['','',999999999999]
         platos = []
         with open("menu_restaurantes.csv") as menus_csv:
             next(menus_csv)
             linea = leer_csv(menus_csv, corte)
             corte_de_control_menus(platos, linea, corte, restaurantes, menus_csv)
-    except FileNotFoundError:
-        #Puse un pass porque si no encuentra el archivo, significa que no hay restaurantes cargados en memoria
-        #Entonces no tengo platos para cargar a los diccionarios
-        pass
 
 def corte_de_control_menus(platos, linea, corte, restaurantes, menus_csv):
     while linea != corte:
