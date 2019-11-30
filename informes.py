@@ -1,5 +1,5 @@
 #MODULO PARA LOS INFORMES
-from imprimir_mensaje import mensaje_info
+from mensajes_y_validaciones import mensaje_info
 
 def crear_informe(diccionario, tipo_de_informe):
 	#tipo_de_informe es un parametro para saber que informe mostrar
