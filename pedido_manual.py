@@ -149,7 +149,7 @@ def entregar_pedido(cliente, rappitendero_asignado, total_a_pagar, restaurante_e
 	cliente['Rappicreditos'] += rappicreditos_ganados
 	restaurante_elegido['Total de ventas'] += (total_a_pagar * 0.95)
 	rappitendero_asignado['Propina acumulada'] += propina_rappitendero
-	rappitendero_asignado['Pedido actual'] = {'Pedido': [], 'Destino': ''}
+	rappitendero_asignado['Pedido actual'] = None
 	informar_sobre_pedido(simulacion, tiempo_estimado, total_a_pagar, rappicreditos_ganados)
 
 def calcular_propina_rappitendero(total_a_pagar):
