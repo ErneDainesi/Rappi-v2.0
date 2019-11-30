@@ -9,14 +9,16 @@ from informes import *
 from carga_manual import *
 from pedido_manual import pedido_manual
 from simulacion_pedidos import simulacion_de_pedidos
+from carga_archivos import cargar_archivos, guardar_datos_antes_de_salir
 
 OPCION_MENU_CARGA = 1
 OPCION_MENU_PEDIDOS = 2
 OPCION_MENU_INFORMES = 3
 
 def main():
-	restaurantes, clientes, rappitenderos = dict(), dict(), dict()
+	restaurantes, clientes, rappitenderos = cargar_archivos()
 	menu_principal(restaurantes, clientes, rappitenderos)
+	guardar_datos_antes_de_salir(restaurantes, clientes, rappitenderos)
 
 def menu_principal(restaurantes, clientes, rappitenderos):
 	opcion_elegida = 0
