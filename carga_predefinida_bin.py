@@ -9,6 +9,7 @@ def carga_predefinida(restaurantes, clientes, rappitenderos):
 	realizar_carga = mensaje_solicitud("Desea continuar? (s/n): ")
 	if realizar_carga == "s":
 		limpiar_pantalla()
+		vaciar_diccionarios(restaurantes, rappitenderos, clientes)
 		crear_archivos_binarios() #En info_predefinida
 		leer_archivos_binarios(restaurantes, clientes, rappitenderos)
 		sobreescribir_con_info_predefinida(restaurantes, clientes, rappitenderos)
@@ -26,3 +27,8 @@ def sobreescribir_con_info_predefinida(restaurantes, clientes, rappitenderos):
 	grabar_en_csv(restaurantes, "restaurantes.csv")
 	grabar_en_csv(clientes, "clientes.csv")
 	grabar_en_csv(rappitenderos, "rappitenderos.csv")
+
+def vaciar_diccionarios(restaurantes, rappitenderos, clientes):
+	restaurantes.clear()
+	rappitenderos.clear()
+	clientes.clear()
