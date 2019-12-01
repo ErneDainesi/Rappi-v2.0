@@ -23,15 +23,19 @@ def validar_inicio_de_sesion(usuario, clientes):
 
 def mostrar_restaurantes(restaurantes, usuario, rappitenderos, clientes):
 	limpiar_pantalla()
-	print('\nBienvenido {}'.format(usuario))
-	print('\n**** RESTAURANTES ****\n')
+	print('Bienvenido {}'.format(usuario))
 	cliente = clientes[usuario]
 	restaurantes_a_pedir = restaurantes_dentro_del_rango(restaurantes, cliente)
-	indice = 0
-	for restaurante in restaurantes_a_pedir:
-		indice += 1
-		print("{}) {}".format(indice, restaurante))
-	elegir_restaurante(cliente, restaurantes, rappitenderos, restaurantes_a_pedir)
+	if len(restaurantes_a_pedir) >= 1:
+		print('\n**** RESTAURANTES ****\n')
+		indice = 0
+		for restaurante in restaurantes_a_pedir:
+			indice += 1
+			print("{}) {}".format(indice, restaurante))
+		elegir_restaurante(cliente, restaurantes, rappitenderos, restaurantes_a_pedir)
+	else:
+		mensaje_info("No hay ningun restaurante que entregue a su direccion.")
+		mensaje_info('Su sesion a sido cerrada.')
 
 def restaurantes_dentro_del_rango(restaurantes, cliente):
 	#Devuelve una lista con los restaurantes que hacen envios al domicilio del cliente.
