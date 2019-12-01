@@ -1,5 +1,5 @@
 from imprimir_menus import limpiar_pantalla
-from imprimir_mensaje import *
+from mensajes_y_validaciones import mensaje_info, mensaje_solicitud
 from info_predefinida import crear_archivos_binarios
 from carga_archivos import grabar_en_csv, leer_binario, platos_csv
 
