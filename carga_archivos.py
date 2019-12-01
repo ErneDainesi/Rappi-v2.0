@@ -1,6 +1,5 @@
 import os.path
 import pickle
-from imprimir_mensaje import *
 
 def cargar_archivos():
     restaurantes, clientes, rappitenderos = dict(), dict(), dict()
