@@ -11,7 +11,7 @@ def cargar_archivos():
     return restaurantes, clientes, rappitenderos
 
 def guardar_datos_antes_de_salir(restaurantes, clientes, rappitenderos):
-    #Guarda todos los datos de los diccionarios hasta el momento de uso con la info más actual
+    #Guarda en archivos todos los datos que estan dentro de los diccionarios hasta el ultimo momento de uso
     vaciar_archivo("restaurantes.csv")
     vaciar_archivo("clientes.csv")
     vaciar_archivo("rappitenderos.csv")
