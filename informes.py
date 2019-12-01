@@ -35,7 +35,7 @@ def mostrar_listado(diccionario):
 	puesto = 0
 	for cliente in ranking_ordenado[:10]:
 		puesto += 1
-		print('{} - {} - ${}'.format(puesto, cliente[0], cliente[1]))
+		print('{} - {} - ${}'.format(puesto, cliente[0], round(cliente[1], 1)))
 
 def recorridos_rappitenderos(rappitenderos):
 	print('\n **** DISTANCIAS RECORRIDAS ****\n')
