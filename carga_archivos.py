@@ -21,7 +21,7 @@ def guardar_datos_antes_de_salir(restaurantes, clientes, rappitenderos):
     grabar_en_csv(rappitenderos, "rappitenderos.csv")
 
 def cargar_datos_csv(nombre_csv, diccionario):
-    try:
+    if os.path.exists(nombre_csv):
         corte = []
         with open(nombre_csv) as archivo:
             next(archivo) #saltea el encabezado
@@ -29,9 +29,6 @@ def cargar_datos_csv(nombre_csv, diccionario):
             while linea != corte:
                 cargar_diccionario_csv(linea, diccionario, nombre_csv)
                 linea = leer_csv(archivo, corte)
-        return diccionario
-    except FileNotFoundError:
-        return diccionario
 
 def leer_csv(archivo, corte):
     linea = archivo.readline()
