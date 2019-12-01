@@ -9,7 +9,6 @@ def carga_predefinida(restaurantes, clientes, rappitenderos):
 	realizar_carga = mensaje_solicitud("Desea continuar? (s/n): ")
 	if realizar_carga == "s":
 		limpiar_pantalla()
-		
 		crear_archivos_binarios() #En info_predefinida
 		leer_archivos_binarios(restaurantes, clientes, rappitenderos)
 		sobreescribir_con_info_predefinida(restaurantes, clientes, rappitenderos)
