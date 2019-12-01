@@ -30,7 +30,7 @@ def menu_principal(restaurantes, clientes, rappitenderos):
 		opcion_elegida = ingresar_entre_rangos(1, 4)
 		invocar_submenu_elegido(opcion_elegida, restaurantes, clientes, rappitenderos)
 	limpiar_pantalla()	
-	print('\nGracias por usar Rappi.')
+	print('Gracias por usar Rappi.')
 
 def invocar_submenu_elegido(opcion_elegida, restaurantes, clientes, rappitenderos):
 	limpiar_pantalla()
