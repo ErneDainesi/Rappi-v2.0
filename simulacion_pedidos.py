@@ -42,4 +42,4 @@ def crear_pedido_simulado(pedido, total_a_pagar, platos_restaurante, restaurante
 		total_a_pagar = crear_pedido(plato, restaurantes[restaurante], cantidad_de_porciones, clientes[cliente], total_a_pagar, platos_restaurante, pedido)
 	asignar_pedido_a_rappitendero(clientes[cliente], restaurantes[restaurante], rappitenderos, pedido, total_a_pagar, True)
 	rappicreditos_ganados = calcular_rappicreditos_ganados(total_a_pagar)
-	print("[SIMULACION] {} pidio en {}. Pago ${} y obtuvo {} rappicreditos.".format(cliente, restaurante, total_a_pagar, rappicreditos_ganados))
+	print("[SIMULACION] {} pidio en {}. Pago ${} y obtuvo {} rappicreditos.".format(cliente, restaurante, total_a_pagar, round(rappicreditos_ganados, 2)))
