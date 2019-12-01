@@ -16,7 +16,7 @@ def carga_predefinida(restaurantes, clientes, rappitenderos):
 		platos_csv(restaurantes)
 		mensaje_info('Se ha realizado una carga predefinida.\n')
 		return restaurantes, clientes, rappitenderos
-	print(mensaje_info("Volviendo al menu anterior..."))
+	mensaje_info("Volviendo al menu anterior...")
 
 def leer_archivos_binarios(restaurantes, clientes, rappitenderos):
 	leer_binario("restaurantes_predefinido.bin", restaurantes)
