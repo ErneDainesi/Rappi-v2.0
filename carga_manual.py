@@ -90,7 +90,7 @@ def cargar_cliente(clientes):
     clientes[nombre_usuario] = {'Contrasenia': contrasenia, 'Telefono': telefono, 'Direccion': direccion,
                                 'Posicion': coordenadas, 'Rappicreditos': rappicreditos}
     limpiar_pantalla()
-    mensaje_info("\nEl cliente se ha cargado correctamente.")
+    mensaje_info("El cliente se ha cargado correctamente.")
     return clientes
 
 
@@ -201,7 +201,7 @@ def cargar_rappitendero(rappitenderos, restaurantes):
     rappitenderos[nombre_rappitendero] = {'Propina acumulada': propina_acumulada, 'Posicion actual': coordenadas,
                                           'Pedido actual': pedido_actual, 'Distancia recorrida':0}
     limpiar_pantalla()
-    mensaje_info("\nRappitendero cargado con exito.")
+    mensaje_info("Rappitendero cargado con exito.")
     return rappitenderos
 
 
