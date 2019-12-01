@@ -99,7 +99,6 @@ def escribir_menu(restaurantes, menus_csv):
         for plato in restaurantes[restaurante]["Platos"]:
             menus_csv.write("{},{},{}\n".format(restaurante, plato[0], plato[1]))
 
-
 def leer_binario(nombre_archivo, diccionario_a_cargar):
     with open(nombre_archivo, "rb") as arch:
         seguir_leyendo = True
