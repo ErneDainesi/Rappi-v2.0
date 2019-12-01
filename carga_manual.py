@@ -199,7 +199,7 @@ def cargar_rappitendero(rappitenderos, restaurantes):
     coordenadas = restaurantes[elegir_restaurante_al_azar(restaurantes)]['Posicion']
     pedido_actual = None
     rappitenderos[nombre_rappitendero] = {'Propina acumulada': propina_acumulada, 'Posicion actual': coordenadas,
-                                          'Pedido actual': pedido_actual}
+                                          'Pedido actual': pedido_actual, 'Distancia recorrida':0}
     limpiar_pantalla()
     mensaje_info("\nRappitendero cargado con exito.")
     return rappitenderos
