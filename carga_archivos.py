@@ -1,6 +1,6 @@
 import os.path
 import pickle
-from mensajes_y_validaciones import mensaje_info
+from imprimir_mensaje import *
 
 def cargar_archivos():
     restaurantes, clientes, rappitenderos = dict(), dict(), dict()
@@ -12,9 +12,6 @@ def cargar_archivos():
 
 def guardar_datos_antes_de_salir(restaurantes, clientes, rappitenderos):
     #Guarda en archivos todos los datos que estan dentro de los diccionarios hasta el ultimo momento de uso
-    vaciar_archivo("restaurantes.csv")
-    vaciar_archivo("clientes.csv")
-    vaciar_archivo("rappitenderos.csv")
     grabar_en_csv(restaurantes, "restaurantes.csv")
     platos_csv(restaurantes)
     grabar_en_csv(clientes, "clientes.csv")
@@ -37,7 +34,7 @@ def leer_csv(archivo, corte):
 
 def grabar_en_csv(diccionario, nombre_del_archivo):
     #Guarda los datos del diccionario pasado por parámetro en un archivo .csv
-    with open(nombre_del_archivo, "a") as arch:
+    with open(nombre_del_archivo, "w") as arch:
         escribir_encabezado(arch, nombre_del_archivo)
         for clave in diccionario:
             escribir_en_archivo(clave, diccionario, nombre_del_archivo, arch)
@@ -103,12 +100,7 @@ def cargar_plato_a_restaurante(linea, platos):
     platos.append(plato)
     return platos
 
-def vaciar_archivo(nombre_del_archivo):
-    if os.path.exists(nombre_del_archivo):
-        arch = open(nombre_del_archivo, "w")
-        arch.close()
-    else:
-        mensaje_info("El archivo {} no existe, entonces no se sobreescribio informacion.".format(nombre_del_archivo))
+
 
 def leer_binario(nombre_archivo, diccionario_a_cargar):
     with open(nombre_archivo, "rb") as arch:
@@ -119,7 +111,6 @@ def leer_binario(nombre_archivo, diccionario_a_cargar):
                 cargar_diccionario_info_predefinida(nombre_archivo, dato, diccionario_a_cargar)
             except EOFError:
                 seguir_leyendo = False
-    return diccionario_a_cargar
 
 def cargar_diccionario_info_predefinida(nombre_archivo, dato, diccionario):
     if nombre_archivo == "restaurantes_predefinido.bin":
