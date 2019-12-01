@@ -100,8 +100,6 @@ def cargar_plato_a_restaurante(linea, platos):
     platos.append(plato)
     return platos
 
-
-
 def leer_binario(nombre_archivo, diccionario_a_cargar):
     with open(nombre_archivo, "rb") as arch:
         seguir_leyendo = True
