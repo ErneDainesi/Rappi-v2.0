@@ -76,7 +76,7 @@ def escribir_encabezado(archivo, nombre_del_archivo):
     elif nombre_del_archivo == "restaurantes.csv":
         archivo.write("Nombre,Direccion,Telefono,Latitud,Longitud,Radio de entrega,Total de ventas\n")
     elif nombre_del_archivo == "rappitenderos.csv":
-        archivo.write("Nombre,Propina acumulada,Latitud,Longitud,Pedido actual,Distancia recorrida\n")
+        archivo.write("Nombre,Propina acumulada,Latitud,Longitud,Pedido actual,Distancia recorrida(km)\n")
     elif nombre_del_archivo == "menu_restaurantes.csv":
         archivo.write("Restaurante,Plato,Precio\n")
 
@@ -84,9 +84,9 @@ def escribir_en_archivo(clave, diccionario, nombre_del_archivo, arch):
     if nombre_del_archivo == "clientes.csv":
         arch.write("{},{},{},{},{},{},{}\n".format(clave, diccionario[clave]["Contrasenia"], diccionario[clave]["Telefono"], diccionario[clave]["Direccion"], diccionario[clave]["Posicion"][0], diccionario[clave]["Posicion"][1], diccionario[clave]["Rappicreditos"]))
     elif nombre_del_archivo == "restaurantes.csv":
-        arch.write("{},{},{},{},{},{},{}\n".format(clave, diccionario[clave]["Direccion"], diccionario[clave]["Telefono"], diccionario[clave]["Posicion"][0], diccionario[clave]["Posicion"][1], diccionario[clave]["Radio de Entrega"], diccionario[clave]["Total de ventas"]))
+        arch.write("{},{},{},{},{},{},{}\n".format(clave, diccionario[clave]["Direccion"], diccionario[clave]["Telefono"], diccionario[clave]["Posicion"][0], diccionario[clave]["Posicion"][1], diccionario[clave]["Radio de Entrega"], round(diccionario[clave]["Total de ventas"], 2)))
     elif nombre_del_archivo == "rappitenderos.csv":
-        arch.write("{},{},{},{},{},{}\n".format(clave, diccionario[clave]["Propina acumulada"], diccionario[clave]["Posicion actual"][0], diccionario[clave]["Posicion actual"][1], diccionario[clave]["Pedido actual"], diccionario[clave]["Distancia recorrida"]))
+        arch.write("{},{},{},{},{},{}\n".format(clave, diccionario[clave]["Propina acumulada"], diccionario[clave]["Posicion actual"][0], diccionario[clave]["Posicion actual"][1], diccionario[clave]["Pedido actual"], round(diccionario[clave]["Distancia recorrida"], 2)))
 
 def platos_csv(restaurantes):
     menus_csv = open("menu_restaurantes.csv", "w")
