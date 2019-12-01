@@ -22,7 +22,7 @@ def ingresar_entero_o_flotante(mensaje, tipo_de_dato):
     while type(entrada) != tipo_de_dato:
         entrada = mensaje_solicitud(mensaje)
         try:
-            entrada = int(entrada)
+            entrada = tipo_de_dato(entrada)
             return entrada
         except ValueError:
             if tipo_de_dato == int:
