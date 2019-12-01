@@ -1,7 +1,7 @@
 from imprimir_menus import limpiar_pantalla
-from mensajes_y_validaciones import mensaje_info, mensaje_solicitud
+from imprimir_mensaje import *
 from info_predefinida import crear_archivos_binarios
-from carga_archivos import grabar_en_csv, vaciar_archivo, leer_binario
+from carga_archivos import grabar_en_csv, leer_binario, platos_csv
 
 def carga_predefinida(restaurantes, clientes, rappitenderos):
 	limpiar_pantalla()
@@ -9,18 +9,14 @@ def carga_predefinida(restaurantes, clientes, rappitenderos):
 	realizar_carga = mensaje_solicitud("Desea continuar? (s/n): ")
 	if realizar_carga == "s":
 		limpiar_pantalla()
-		vaciar_archivos_existentes()
+		
 		crear_archivos_binarios() #En info_predefinida
 		leer_archivos_binarios(restaurantes, clientes, rappitenderos)
 		sobreescribir_con_info_predefinida(restaurantes, clientes, rappitenderos)
+		platos_csv(restaurantes)
 		mensaje_info('Se ha realizado una carga predefinida.\n')
 		return restaurantes, clientes, rappitenderos
 	print(mensaje_info("Volviendo al menu anterior..."))
-
-def vaciar_archivos_existentes():
-	vaciar_archivo("restaurantes.csv")
-	vaciar_archivo("clientes.csv")
-	vaciar_archivo("rappitenderos.csv")
 
 def leer_archivos_binarios(restaurantes, clientes, rappitenderos):
 	leer_binario("restaurantes_predefinido.bin", restaurantes)
