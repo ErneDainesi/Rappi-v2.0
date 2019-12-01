@@ -26,17 +26,34 @@ def cargar_datos_csv(nombre_csv, diccionario):
                 cargar_diccionario_csv(linea, diccionario, nombre_csv)
                 linea = leer_csv(archivo, corte)
 
+def cargar_menus_csv(restaurantes):
+    if os.path.exists("menu_restaurantes.csv"):
+        corte = ['','',999999999999]
+        platos = []
+        with open("menu_restaurantes.csv") as menus_csv:
+            next(menus_csv)
+            linea = leer_csv(menus_csv, corte)
+            corte_de_control_menus(platos, linea, corte, restaurantes, menus_csv)
+
+def corte_de_control_menus(platos, linea, corte, restaurantes, menus_csv):
+    while linea != corte:
+        restaurante = linea[0]
+        restaurantes[restaurante]["Platos"] = cargar_plato_a_restaurante(linea, platos)
+        linea = leer_csv(menus_csv, corte)
+        while restaurante == linea[0]: #Mientras siga siendo el mismo restaurante, carga los platos al diccionario
+            restaurantes[restaurante]["Platos"] = cargar_plato_a_restaurante(linea, platos)
+            linea = leer_csv(menus_csv, corte)
+        platos = [] #Si no es el mismo dic, vacio la lista para volver a llenarla con los platos del proximo restaurante
+
+def cargar_plato_a_restaurante(linea, platos):
+    plato = (linea[1], float(linea[2]))
+    platos.append(plato)
+    return platos
+
 def leer_csv(archivo, corte):
     linea = archivo.readline()
     lista = linea.rstrip().split(',')
     return lista if linea else corte
-
-def grabar_en_csv(diccionario, nombre_del_archivo):
-    #Guarda los datos del diccionario pasado por parámetro en un archivo .csv
-    with open(nombre_del_archivo, "w") as arch:
-        escribir_encabezado(arch, nombre_del_archivo)
-        for clave in diccionario:
-            escribir_en_archivo(clave, diccionario, nombre_del_archivo, arch)
 
 def cargar_diccionario_csv(linea, diccionario, nombre_csv):
     if nombre_csv == "restaurantes.csv":
@@ -45,6 +62,13 @@ def cargar_diccionario_csv(linea, diccionario, nombre_csv):
         diccionario[linea[0]] = {'Contrasenia' : linea[1], 'Telefono' : linea[2], 'Direccion' : linea[3], 'Posicion' : (float(linea[4]), float(linea[5])), 'Rappicreditos' : float(linea[6])}
     elif nombre_csv == "rappitenderos.csv":
         diccionario[linea[0]] = {'Propina acumulada' : float(linea[1]), 'Posicion actual' : (float(linea[2]), float(linea[3])), 'Pedido actual' : linea[4], 'Distancia recorrida' : float(linea[5])}
+
+def grabar_en_csv(diccionario, nombre_del_archivo):
+    #Guarda los datos del diccionario pasado por parámetro en un archivo .csv
+    with open(nombre_del_archivo, "w") as arch:
+        escribir_encabezado(arch, nombre_del_archivo)
+        for clave in diccionario:
+            escribir_en_archivo(clave, diccionario, nombre_del_archivo, arch)
 
 def escribir_encabezado(archivo, nombre_del_archivo):
     if nombre_del_archivo == "clientes.csv":
@@ -75,29 +99,6 @@ def escribir_menu(restaurantes, menus_csv):
         for plato in restaurantes[restaurante]["Platos"]:
             menus_csv.write("{},{},{}\n".format(restaurante, plato[0], plato[1]))
 
-def cargar_menus_csv(restaurantes):
-    if os.path.exists("menu_restaurantes.csv"):
-        corte = ['','',999999999999]
-        platos = []
-        with open("menu_restaurantes.csv") as menus_csv:
-            next(menus_csv)
-            linea = leer_csv(menus_csv, corte)
-            corte_de_control_menus(platos, linea, corte, restaurantes, menus_csv)
-
-def corte_de_control_menus(platos, linea, corte, restaurantes, menus_csv):
-    while linea != corte:
-        restaurante = linea[0]
-        restaurantes[restaurante]["Platos"] = cargar_plato_a_restaurante(linea, platos)
-        linea = leer_csv(menus_csv, corte)
-        while restaurante == linea[0]: #Mientras siga siendo el mismo restaurante, carga los platos al diccionario
-            restaurantes[restaurante]["Platos"] = cargar_plato_a_restaurante(linea, platos)
-            linea = leer_csv(menus_csv, corte)
-        platos = [] #Si no es el mismo dic, vacio la lista para volver a llenarla con los platos del proximo restaurante
-
-def cargar_plato_a_restaurante(linea, platos):
-    plato = (linea[1], float(linea[2]))
-    platos.append(plato)
-    return platos
 
 def leer_binario(nombre_archivo, diccionario_a_cargar):
     with open(nombre_archivo, "rb") as arch:
